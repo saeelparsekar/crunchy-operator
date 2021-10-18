@@ -3,7 +3,7 @@ name: Crunchy Data PostgreSQL Operator
 description: Crunchy Data PostgreSQL Operator.
 branding:
     logo: _images/logo.PNG
-    banner: _images/banner.jpeg
+    banner: _images/banner1.jpeg
     textColor: '#FFFFFF'
     header:
         link: https://access.crunchydata.com/documentation/postgres-operator/
