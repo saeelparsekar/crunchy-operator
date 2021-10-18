@@ -1,0 +1,69 @@
+---
+name: Crunchy Data PostgreSQL Operator
+description: Crunchy Data PostgreSQL Operator.
+branding:
+    logo: _images/crunchy-logo-1.png
+    banner: _images/banner.jpeg
+    textColor: '#FFFFFF'
+    header:
+        link: https://access.crunchydata.com/documentation/postgres-operator/
+        text: MariaDB
+        logo: _images/crunchy-logo-1.png
+license: MIT
+duration: 1 hour
+categories:
+    - Database
+intro: README.md
+documentation: https://access.crunchydata.com/documentation/postgres-operator/
+commands:
+    - name: Create directory structure
+      cmd: mkdir -p /home/student/projects/postgres-operator
+      stepMessage: Creating directory structure ....
+    - name: Create Namespace
+      cmd: export PGO_OPERATOR_NAMESPACE=pgo
+      stepMessage: Creating Namespace ....
+    - name: Clone and Prepare
+      cmd: cd /home/student/projects && git clone https://github.com/operator-playground-io/crunchy-postgres-scripts.git && cd crunchy-postgres-scripts && kubectl create -f postgresql.yaml && kubectl create -f service.yaml -n pgo
+      stepMessage: clonnig repo preparing the repo ....
+    - name: Get VM IP
+      cmd: export ip_addr=$(ifconfig eth1 | grep inet | awk '{print $2}' | cut -f2 -d:)
+      stepMessage: Getting VM ip ....
+    - name: Create a Service
+      cmd: curl -o service.yaml https://raw.githubusercontent.com/operator-playground/postgres-operator/sample-app/service.yaml && kubectl create -f service.yaml -n pgo
+      stepMessage: Creating service....
+    - name: Spin up operator
+      cmd: until nc -z -v -w30 $ip_addr 32443; do echo \"Waiting for database connection...\"; sleep 5; done;
+      stepMessage: Wait for Postgres Operator to spin up ....
+environment:
+    terminal:
+        name: Terminal
+        enabled: true
+    ide:
+        name: IDE
+        enabled: true
+        url: '{{ IDE.url }}'
+    application:
+        name: App Preview
+        url: '{{ DNS.host }}'
+        enabled: false
+config:
+    launchBtn:
+        buttonLabel: Launch
+    execCmd : 
+        autoExecute: false
+        buttonLabel: Execute Commands
+backend:
+    service: k8s
+tileInfo:
+    - title: 1. Operator Installation Verification
+      description: A User Guide for Crunchy Data PostgreSQL Operator
+      duration: 10 min
+      content: operator-installation-verification-tutorial.md
+    - title: 2. Crunchy Data PostgreSQL Operator
+      description: A User Guide for Crunchy Data PostgreSQL Operator
+      duration: 10 min
+      content: Crunchy-PostgreSQL-Operator-tutorial.md
+    - title: 3. Sample Application Tutorial
+      description: Sample Application using PostgreSQL DB Cluster from Crunchy
+      duration: 10 min
+      content: Crunchy-db-example-application.md
