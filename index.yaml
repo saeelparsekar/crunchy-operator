@@ -25,9 +25,6 @@ commands:
     - name: Clone and Prepare
       cmd: cd /home/student/projects && git clone https://github.com/operator-playground-io/crunchy-postgres-scripts.git && cd crunchy-postgres-scripts && kubectl create -f postgresql.yaml && kubectl create -f service.yaml -n pgo
       stepMessage: clonnig repo preparing the repo ....
-    - name: Get VM IP
-      cmd: export ip_addr=$(ifconfig eth1 | grep inet | awk '{print $2}' | cut -f2 -d:)
-      stepMessage: Getting VM ip ....
     - name: Create a Service
       cmd: curl -o service.yaml https://raw.githubusercontent.com/operator-playground/postgres-operator/sample-app/service.yaml && kubectl create -f service.yaml -n pgo
       stepMessage: Creating service....
