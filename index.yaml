@@ -2,13 +2,13 @@
 name: Crunchy Data PostgreSQL Operator
 description: Crunchy Data PostgreSQL Operator.
 branding:
-    logo: _images/crunchy-logo-1.png
+    logo: _images/logo.PNG
     banner: _images/banner.jpeg
     textColor: '#FFFFFF'
     header:
         link: https://access.crunchydata.com/documentation/postgres-operator/
         text: MariaDB
-        logo: _images/crunchy-logo-1.png
+        logo: _images/logo.PNG
 license: MIT
 duration: 1 hour
 categories:
